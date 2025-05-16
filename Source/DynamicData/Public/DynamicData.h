@@ -3,7 +3,7 @@
 #include "CoreMinimal.h"
 #include "Modules/ModuleManager.h"
 
-class FPLUGIN_NAMEModule : public IModuleInterface
+class FDynamicDataModule : public IModuleInterface
 {
 public:
     virtual void StartupModule() override;
