@@ -1,8 +1,8 @@
 ﻿using UnrealBuildTool;
 
-public class PLUGIN_NAME : ModuleRules
+public class DynamicData : ModuleRules
 {
-    public PLUGIN_NAME(ReadOnlyTargetRules Target) : base(Target)
+    public DynamicData(ReadOnlyTargetRules Target) : base(Target)
     {
         PCHUsage = ModuleRules.PCHUsageMode.UseExplicitOrSharedPCHs;
 
@@ -10,7 +10,8 @@ public class PLUGIN_NAME : ModuleRules
             new string[]
             {
                 "Core",
-                "UniversalUtilities"
+                "UniversalUtilities",
+                "StructUtils"
             }
         );
 
