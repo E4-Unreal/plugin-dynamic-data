@@ -2,9 +2,9 @@
 	"FileVersion": 3,
 	"Version": 1,
 	"VersionName": "0.1.0",
-	"FriendlyName": "PLUGIN_NAME",
+	"FriendlyName": "DynamicData",
 	"Description": "",
-	"Category": "Other",
+	"Category": "Data",
 	"CreatedBy": "Eu4ng",
 	"CreatedByURL": "https://github.com/Eu4ng",
 	"DocsURL": "",
@@ -16,7 +16,7 @@
 	"Installed": false,
 	"Modules": [
 		{
-			"Name": "PLUGIN_NAME",
+			"Name": "DynamicData",
 			"Type": "Runtime",
 			"LoadingPhase": "Default"
 		}
