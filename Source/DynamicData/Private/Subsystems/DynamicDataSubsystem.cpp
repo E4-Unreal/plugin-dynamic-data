@@ -14,21 +14,33 @@ bool UDynamicDataSubsystem::ShouldCreateSubsystem(UObject* Outer) const
     return ChildClasses.Num() == 0;
 }
 
-UDefinitionBase* UDynamicDataSubsystem::GetDefinition(TSubclassOf<UDefinitionBase> DefinitionClass, int32 ID)
+TArray<UDefinitionBase*> UDynamicDataSubsystem::GetAllDefinitions(TSubclassOf<UDefinitionBase> DefinitionClass)
+{
+    TArray<UDefinitionBase*> Definitions;
+    if (!DefinitionClass) return Definitions;
+
+    UAssetManager& AssetManager = UAssetManager::Get();
+    TArray<FAssetData> AssetDataList;
+    AssetManager.GetPrimaryAssetDataList(DefinitionClass->GetFName(), AssetDataList);
+    Definitions.Reserve(AssetDataList.Num());
+
+    for (const FAssetData& AssetData : AssetDataList)
+    {
+        UDefinitionBase* Definition = Cast<UDefinitionBase>(AssetData.GetAsset());
+        if (Definition) Definitions.Emplace(Definition);
+    }
+
+    return Definitions;
+}
+
+UDefinitionBase* UDynamicDataSubsystem::GetDefinitionByID(TSubclassOf<UDefinitionBase> DefinitionClass, int32 ID)
 {
     if (!DefinitionClass || ID < 0) return nullptr;
-
-    UDefinitionBase* Definition = nullptr;
 
     UAssetManager& AssetManager = UAssetManager::Get();
     FPrimaryAssetId AssetID = FPrimaryAssetId(DefinitionClass->GetFName(), FName(FString::FromInt(ID)));
     FAssetData AssetData;
     AssetManager.GetPrimaryAssetData(AssetID, AssetData);
 
-    if (AssetData.IsValid() && AssetData.GetAsset()->IsA(DefinitionClass))
-    {
-        Definition = Cast<UDefinitionBase>(AssetData.GetAsset());
-    }
-
-    return Definition;
+    return Cast<UDefinitionBase>(AssetData.GetAsset());
 }

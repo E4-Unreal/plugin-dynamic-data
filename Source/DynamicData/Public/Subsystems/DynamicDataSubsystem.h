@@ -22,11 +22,14 @@ public:
     virtual bool ShouldCreateSubsystem(UObject* Outer) const override;
 
     UFUNCTION(BlueprintCallable)
-    virtual UDefinitionBase* GetDefinition(TSubclassOf<UDefinitionBase> DefinitionClass, int32 ID);
+    virtual TArray<UDefinitionBase*> GetAllDefinitions(TSubclassOf<UDefinitionBase> DefinitionClass);
+
+    UFUNCTION(BlueprintCallable)
+    virtual UDefinitionBase* GetDefinitionByID(TSubclassOf<UDefinitionBase> DefinitionClass, int32 ID);
 
     template <typename T = UDefinitionBase>
-    T* GetDefinition(int32 ID)
+    T* GetDefinitionByID(int32 ID)
     {
-        return Cast<T>(GetDefinition(T::StaticClass(), ID));
+        return Cast<T>(GetDefinitionByID(T::StaticClass(), ID));
     }
 };
