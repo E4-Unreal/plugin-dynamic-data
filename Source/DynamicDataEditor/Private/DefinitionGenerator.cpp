@@ -21,7 +21,7 @@ UDefinitionBase* UDefinitionGenerator::GetOrCreateDefinition(TSubclassOf<UDefini
 {
     if (auto DataSubsystem = GEngine->GetEngineSubsystem<UDynamicDataSubsystem>())
     {
-        if (UDefinitionBase* Definition = DataSubsystem->GetDefinition(DefinitionClass, ID))
+        if (UDefinitionBase* Definition = DataSubsystem->GetDefinitionByID(DefinitionClass, ID))
         {
             return Definition;
         }
